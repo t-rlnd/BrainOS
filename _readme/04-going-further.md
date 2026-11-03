@@ -31,7 +31,7 @@ Dis à Claude *"ajoute un bloc Dataview sur cette page pour lister toutes les so
 ### Télécharger les images en local
 
 Dans Obsidian → Settings → Files and links :
-- **Attachment folder path** → mettre `raw/assets/`
+- **Attachment folder path** → mettre `raw/resources/`
 
 Puis → Settings → Hotkeys → chercher *"Download"* → assigner un raccourci à **"Download attachments for current file"**.
 
@@ -45,7 +45,8 @@ Ton BrainOS contient des fichiers-système que **Claude gère seul**. Tu n'as pa
 
 - `index.md` — le sommaire du wiki. Mis à jour à chaque ingest.
 - `log.md` — l'historique chronologique de tout ce qui s'est passé.
-- Les fichiers `--index-*.md` dans chaque sous-dossier — sous-sommaires détaillés.
+- Les fichiers `--index-*.md` dans chaque dossier — sous-sommaires détaillés.
+- `memory.md` — les règles apprises en route. Tu peux le lire et demander à Claude d'y ajouter une règle : « Ajoute à memory.md la règle : … »
 - Le dossier `.claude/` — contient les commandes, skills et agents personnalisés. N'y touche que si tu sais ce que tu fais.
 
 Tu peux les lire pour ta curiosité. Ne les édite pas à la main.
@@ -70,6 +71,10 @@ Si ton profil a beaucoup bougé (6 mois plus tard, nouveau projet, pivot pro), d
 
 Claude relance le prompt d'interview de l'étape 02 et réécrit ton `CLAUDE.md`.
 
+### Faire évoluer l'arborescence
+
+L'arborescence du template est une base de départ. Tu n'écris pas de contenu ? Supprime `todo/content/`. Tu gères plusieurs produits ? Ajoute `todo/products/`. Un type de page revient souvent dans le wiki ? Crée-lui un sous-dossier. Dis simplement à Claude ce que tu changes : il met à jour la section Architecture du `CLAUDE.md` et les index.
+
 ### Créer tes propres commandes
 
 Les commandes `/analyze`, `/brain`, etc. sont définies dans le dossier `.claude/commands/`. Ce sont de simples fichiers markdown. Tu peux en ajouter :
@@ -84,7 +89,7 @@ Claude créera le fichier.
 
 Ton BrainOS est un simple dossier de fichiers markdown. Si tu l'as cloné depuis GitHub, il est déjà versionné.
 
-Dans VS Code ou dans un terminal :
+Demande à Claude « fais un commit de ma base et pousse-le », ou dans un terminal :
 ```bash
 git add .
 git commit -m "Ingests de la semaine"
@@ -106,9 +111,9 @@ Tu as maintenant un historique complet de l'évolution de ta pensée. Et un back
 
 ### Changer de modèle
 
-Par défaut, Claude Code utilise Claude Sonnet. Pour les tâches complexes (ingests denses, synthèses croisées, analyse approfondie), tu peux passer sur **Claude Opus** — plus puissant, plus lent.
+Selon ton abonnement, Claude Code peut utiliser plusieurs modèles. Pour les tâches complexes (ingests denses, synthèses croisées, analyse approfondie), choisis le plus puissant ; pour le quotidien, le modèle par défaut suffit.
 
-Dans le terminal, tape :
+Dans ta session, tape (ou utilise le sélecteur de modèle de Claude Desktop) :
 
 ```
 /model

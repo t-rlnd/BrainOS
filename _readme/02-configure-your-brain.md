@@ -2,89 +2,93 @@
 
 > L'étape la plus importante. Ton BrainOS doit **te connaître**. Un système générique est inutile — un système qui sait **qui tu es, ce que tu cherches, comment tu penses** devient un vrai multiplicateur.
 
-Plutôt que de te faire remplir des formulaires, on va laisser Claude **t'interviewer pendant 10-15 minutes**. Il te posera des questions, tu répondras naturellement, et à la fin il écrira tout seul un fichier `CLAUDE.md` adapté à toi.
+Plutôt que de te faire remplir des formulaires, on va laisser Claude **t'interviewer pendant une quinzaine de minutes**. Il te posera ses questions une par une, tu répondras naturellement. À la fin, il réécrit ton `CLAUDE.md` et pose les premiers brouillons de `company/` : `now.md`, `offers.md` et `writing-rules.md`.
 
-Ce fichier, c'est le "mode d'emploi" que Claude utilisera à chaque session pour se souvenir de qui tu es.
+Le `CLAUDE.md`, c'est le mode d'emploi que Claude lit au début de chaque session pour savoir qui tu es et comment ta base est rangée.
 
 ---
 
-## Comment faire — pas à pas
+## Comment faire, pas à pas
 
-### 1. Ouvre une session Claude via l'extension Claude de VS Code.
+### 1. Dépose quelques documents dans `raw/` (facultatif)
 
-Ouvre l'extension Claude, démarre une nouvelle session. Une page de discussion avec Claude s'ouvre.
+Une proposition type, un brief client, un texte qui te ressemble. Claude y jettera un œil pour poser des questions plus précises. Il ne les analysera pas encore.
 
-### 2. Copie le gros prompt plus bas
+### 2. Ouvre une session dans ton BrainOS
 
-Sélectionne **tout le bloc de code grisé** dans la section "Le prompt d'interview" juste en dessous (du premier au dernier tiret). Copie-le (Cmd/Ctrl + C).
+Dans la surface choisie à l'étape 01 : onglet Code de Claude Desktop, terminal ou éditeur.
 
-### 3. Colle-le dans Claude
+### 3. Colle le prompt d'interview
 
-Retourne dans l'extension Claude Code dans VS Code, clique dedans, colle (Cmd/Ctrl + V), puis appuie sur Entrée.
+Copie tout le bloc de la section suivante, colle-le, envoie.
 
 ### 4. Laisse-toi interviewer
 
-Claude va te poser des questions une par une. **Réponds honnêtement, sans chercher à bien formuler.** Si une question te semble floue, demande à Claude de préciser. Si tu te trompes, corrige-toi — il comprendra.
+**Réponds comme à l'oral**, sans chercher à bien formuler. Si tu as une application de dictée, c'est le moment. **Sois concret** : « des PME industrielles de 20 à 100 salariés » vaut mieux que « des PME ». **Dis « je ne sais pas »** quand c'est le cas : Claude le notera comme une question ouverte au lieu d'inventer.
 
-### 5. Valide à la fin
+Pour la supervision (question 10), je te conseille le mode impliqué au début : Claude te résume chaque source et te demande l'angle avant d'écrire.
 
-Quand Claude estime avoir assez de matière, il te fera un résumé de ce qu'il a compris. Lis-le, corrige ce qui n'est pas juste, puis dis-lui d'écrire ton `CLAUDE.md`.
+### 5. Valide le récapitulatif, puis relis
+
+Avant d'écrire, Claude te montre ce qu'il a compris. Corrige ce qui est faux, puis dis « c'est bon, écris ». Ensuite, ouvre le `CLAUDE.md` et relis-le ligne par ligne : il sera lu avant chacune de tes sessions. Pour corriger, demande à Claude plutôt que de modifier le fichier toi-même.
 
 ---
 
 ## Le prompt d'interview
 
-Copie tout le bloc ci-dessous, du premier au dernier tiret.
+```text
+Tu es l'architecte de mon BrainOS. Avant de configurer quoi que ce
+soit, tu vas m'interviewer pour comprendre qui je suis et comment je
+travaille, puis personnaliser ma base.
 
-```
-Tu es l'architecte de mon BrainOS. Avant de configurer quoi que ce soit, tu vas m'interviewer pour comprendre qui je suis et comment je pense — puis écrire un CLAUDE.md personnalisé qui te servira de schéma pour les prochaines années.
+CONTEXTE
+BrainOS est un second cerveau maintenu par toi. J'apporte les sources
+et les questions, tu fais l'extraction, la structuration, les liens et
+les synthèses. Le CLAUDE.md actuel est un modèle avec des champs à
+remplir. Ton travail : le remplacer par une version qui me ressemble.
 
-CONTEXTE POUR TOI
+AVANT DE COMMENCER
+Liste les fichiers de raw/ en une ligne chacun, sans les analyser.
+Ils t'aideront à poser des questions précises.
 
-BrainOS est un pattern de Second Brain maintenu par toi (le LLM). L'humain apporte les sources et les questions. Tu fais le travail d'extraction, de structuration, de cross-référencement et de synthèse. Le wiki vit dans `wiki/` et s'enrichit à chaque ingest. Le fichier `CLAUDE.md` que tu vas produire est la seule chose qui te distingue d'un chatbot générique : il te dit comment penser, quoi privilégier, quel vocabulaire utiliser, quels domaines sont prioritaires.
+PENDANT L'INTERVIEW
+- Une question à la fois. Attends ma réponse avant la suivante.
+- Reformule après chaque réponse (« si je résume… »). Je corrige.
+- Creuse quand une réponse est vague.
+- N'écris rien dans les fichiers avant la fin, sauf si je te le demande.
+- Une quinzaine de questions au maximum.
 
-Le CLAUDE.md actuel est un template avec des placeholders. Ton job est de le remplacer par une version qui reflète vraiment la personne en face de toi.
-
-TON RÔLE PENDANT L'INTERVIEW
-
-- Pose tes questions UNE À LA FOIS, pas en batch. Attends ma réponse avant la suivante.
-- Reformule après chaque réponse pour vérifier que tu as bien compris ("donc si je résume…"). Je corrige si besoin.
-- Creuse quand une réponse est vague. Une interview superficielle produit un CLAUDE.md superficiel.
-- Si je dis quelque chose de surprenant ou contradictoire, note-le mentalement — ça fera partie de ma singularité à capturer.
-- N'écris RIEN dans les fichiers avant la fin de l'interview. Pas de mise à jour intermédiaire. Sauf si je te demande explicitement de sauvegarder ce qui a été partagé ou de mettre en pause.
-
-CE QUE TU DOIS APPRENDRE (dans cet ordre, adapte selon mes réponses)
-
-1. IDENTITÉ — prénom, rôle actuel (pro et perso si pertinent), contexte de vie en une phrase. Est-ce que je dirige un projet, une entreprise, une équipe ? Suis-je salarié, freelance, fondateur, étudiant ?
-
-2. POURQUOI BRAINOS — qu'est-ce que j'essaie d'accumuler et pourquoi ? Qu'est-ce qui m'a manqué dans mon système précédent (Notion, Apple Notes, rien, etc.) ? Quel type de question j'aimerais pouvoir poser à mon cerveau dans 6 mois ?
-
-3. DOMAINES — 2 à 4 grands territoires de connaissance que je veux cultiver. Pas des mots creux ("productivité") — des domaines opérationnels ("architecture de scénarios Make", "psychologie des fondateurs solo", "copywriting SaaS B2B"). Pour chacun, demande ce qui m'intéresse précisément et ce qui ne m'intéresse pas.
-
-4. STACK — outils que j'utilise quotidiennement ou que je maîtrise. Ça t'aide à calibrer le niveau technique de tes explications et à faire des ponts pertinents.
-
-5. OBJECTIFS 6–12 MOIS — 2 ou 3 choses concrètes que je veux accomplir. Ça te permettra plus tard de repérer quand une source est particulièrement pertinente pour mes priorités.
-
-6. STYLE DE PENSÉE ET DE TRAVAIL — est-ce que je préfère les synthèses ultra-courtes ou les analyses creusées ? Les bullet points ou les paragraphes ? Les frameworks ou les exemples concrets ? Le ton : direct et cash ou nuancé et diplomate ? Est-ce que j'aime être challengé ou j'attends que tu valides mes intuitions ?
-
-7. LANGUE — français, anglais, mixte ?
-
-8. CONTRAINTES OU INTERDITS — y a-t-il des sujets que je ne veux pas voir dans le wiki ? Des personnes, des entreprises, des outils à ne jamais mentionner ? Des modes de réponse qui m'agacent ("ne me propose jamais de faire de la méditation", "ne me donne pas des conseils génériques de LinkedIn", etc.) ?
-
-9. NIVEAU DE SUPERVISION — quand tu ingères une source, est-ce que tu préfères discuter avec moi d'abord (mode impliqué) ou agir sans pause (mode batch) ?
+CE QUE TU DOIS APPRENDRE, DANS CET ORDRE
+1. Identité : prénom, métier, statut (freelance, salarié, fondateur),
+   activité en une phrase.
+2. Mon offre : ce que je vends, à qui, à quel prix.
+3. Pourquoi BrainOS : ce que je veux accumuler, ce qui m'a manqué
+   jusqu'ici, la question que j'aimerais poser à ma base dans six mois.
+4. Mes domaines : 2 à 4 territoires précis, avec ce qui m'intéresse
+   et ce qui ne m'intéresse pas.
+5. Mes outils du quotidien.
+6. Mes objectifs à 6-12 mois : 2 ou 3 choses concrètes.
+7. Ma façon de travailler avec toi : synthèses courtes ou analyses
+   creusées, ton direct ou nuancé, être challengé ou non.
+8. Ma façon d'écrire : tutoiement ou vouvoiement, longueur, formules
+   que je déteste.
+9. Mes interdits : sujets, formulations ou conseils à éviter.
+10. Le niveau de supervision : quand tu analyses une source, tu
+    discutes d'abord avec moi, ou tu avances sans pause ?
 
 APRÈS L'INTERVIEW
-
-Quand tu as assez de matière (tu le sauras — l'image est nette), récapitule en 10–15 lignes ce que tu as compris de moi. Attends ma validation.
-
-Puis réécris `CLAUDE.md` :
-- Remplis la section "Qui tu es" avec mon profil réel (nom, rôle, contexte, domaines, objectifs)
-- Ajoute en bas une section "Préférences" qui capture mon style (ton, format, longueur, ce qu'il faut éviter)
-- Garde intact le reste (architecture, opérations, conventions, permissions, interdits) — c'est le socle
-- Propose-moi une ou deux règles de plus si tu vois quelque chose de spécifique à mon cas qui mérite d'être codifié
-- Crée un fichier profil-prenom-nom.md avec les informations détaillé que tu as retenu de mon interview.
-
-Ensuite confirme que le fichier est prêt et invite-moi à passer à `README/03-first-ingest.md`.
+1. Récapitule en 10 à 15 lignes ce que tu as compris. Attends ma
+   validation.
+2. Réécris CLAUDE.md : remplis « Qui tu es » en 3 à 5 lignes et
+   « Comment travailler avec moi », garde intact le reste
+   (architecture, opérations, conventions, interdits). Propose-moi une
+   ou deux règles spécifiques à mon cas. Moins de 150 lignes.
+3. Écris les brouillons de company/now.md, company/offers.md et
+   company/writing-rules.md à partir de mes réponses. N'invente rien :
+   ce que tu ne sais pas, écris-le comme une question ouverte.
+4. Mets à jour company/--index-company.md et ajoute une entrée
+   « init » dans log.md.
+5. Montre-moi la liste des fichiers écrits.
 
 Commence par te présenter en une phrase, puis pose ta première question.
 ```
@@ -107,13 +111,13 @@ C'est la différence entre un questionnaire RH et une vraie discussion avec quel
 
 ## Après l'interview
 
-Ouvre ton `CLAUDE.md` dans Obsidian ou dans VS Code. Jette un œil à ce que Claude a écrit. Si une phrase te dérange, modifie-la directement (c'est un simple fichier texte) ou demande à Claude de la réécrire.
+Ouvre ton `CLAUDE.md` et les fichiers de `company/`. Jette un œil à ce que Claude a écrit. Si une phrase te dérange, modifie-la directement (c'est un simple fichier texte) ou demande à Claude de la réécrire.
 
 **Tu peux refaire l'interview plus tard.** Si ta vie change dans 6 mois (nouveau projet, nouveau métier, nouveaux centres d'intérêt), dis simplement à Claude :
 
 > *"Refais l'interview de configuration, j'ai évolué."*
 
-Il relancera le même processus et mettra ton fichier à jour.
+Il relancera le même processus et mettra à jour ton `CLAUDE.md` et `company/`.
 
 ---
 

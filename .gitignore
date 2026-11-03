@@ -1,0 +1,22 @@
+# Système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Obsidian : réglages qui changent sans cesse ou propres à cet ordinateur
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/cache
+.trash/
+
+# Claude Code : réglages locaux et fichiers temporaires
+.claude/settings.local.json
+.claude/worktrees/
+
+# Fichiers temporaires
+*.tmp
+
+# Gros fichiers : à garder hors de Git
+*.mp4
+*.mov
+*.zip

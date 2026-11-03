@@ -1,22 +1,24 @@
-# BrainOS — Mémoire projet
+# BrainOS — Mémoire
 
-> Règles, corrections de comportement et préférences spécifiques à ce projet.
-> Ce fichier complète `CLAUDE.md` (schema) et `log.md` (historique).
-> Lu en début de session après `index.md` et `log.md`.
+> Règles, corrections de comportement et préférences apprises en route.
+> Ce fichier complète `CLAUDE.md` (le schéma) et `log.md` (l'historique).
+> Lu au démarrage de chaque session, après `index.md` et `log.md`.
+>
+> Format d'une entrée : un titre, puis Date, Règle, Pourquoi.
+> Pour ajouter une règle : « Ajoute à memory.md la règle : … »
 
 ---
 
 ## Comportements corrigés
 
-### /analyze sans argument → scanner raw/
-**Date :** 2026-04-14
-**Règle :** `/analyze` sans argument doit scanner et traiter tous les fichiers de `raw/` (hors `raw/assets/`), plutôt que demander à l'utilisateur de préciser une source.
-**Pourquoi :** Correction explicite de l'utilisateur lors de la session d'initialisation.
-**Application :** La commande [.claude/commands/analyze.md](.claude/commands/analyze.md) a été mise à jour en conséquence (étape 2 — Résolution de la source).
+### Si une information manque, demander
+**Date :** YYYY-MM-DD
+**Règle :** si une information manque dans la base (un prix, une date, un nom), la demander au lieu de l'inventer.
+**Pourquoi :** une information inventée dans une proposition ou un e-mail coûte plus cher qu'une question.
 
 ---
 
-## Préférences d'ingest
+## Préférences
 
 *(à compléter au fil des sessions)*
 
@@ -24,4 +26,4 @@
 
 ## Conventions locales
 
-*(à compléter si des exceptions aux règles globales de CLAUDE.md émergent)*
+*(exceptions aux règles de CLAUDE.md, si elles apparaissent)*

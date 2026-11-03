@@ -12,7 +12,7 @@ argument-hint: [optionnel : contenu libre à ajouter à la note]
 ### 1. Session loading (si pas déjà fait)
 
 - Lire `index.md`
-- `grep "^## \[" log.md | tail -10`
+- `grep "^## \[" log.md | head -10`
 
 ### 2. Localiser ou créer la note du jour
 
@@ -67,6 +67,7 @@ Relire la note complète et identifier :
 - **Sources à ingérer** (URLs, livres, podcasts mentionnés) → proposer un `/analyze` pour chacune
 - **Entités nouvelles** (personne/outil/entreprise non encore dans le wiki) → proposer une page `wiki/entities/`
 - **Concepts évoqués** qui mériteraient une page dédiée
+- **Actions** à faire (relancer, envoyer, préparer…) → proposer de les ranger dans `todo/` avec `/todo`
 
 **Ne pas ingérer automatiquement** — proposer à l'utilisateur les extractions à lancer, une par une.
 

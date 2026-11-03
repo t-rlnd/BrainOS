@@ -1,6 +1,6 @@
 ---
 name: append-log
-description: Appender une entrée dans log.md pour tracer une opération (ingest, query, lint, daily, end-session, init). Append-only, jamais de modification d'entrée existante.
+description: Appender une entrée dans log.md pour tracer une opération (init, ingest, meeting, query, lint, daily, todo, export, config). Append-only, jamais de modification d'entrée existante.
 ---
 
 # append-log
@@ -12,7 +12,10 @@ description: Appender une entrée dans log.md pour tracer une opération (ingest
 - `query` — après un `/brain` si la réponse a été archivée
 - `lint` — après un `/lint`
 - `daily` — après un `/daily`
-- `end-session` — à la demande explicite (`/end-session`)
+- `meeting` — après l'analyse d'une réunion
+- `todo` — après un `/todo` ou un `/do`
+- `export` — après un export (par exemple vers un Project claude.ai)
+- `config` — après une modification du schéma, de l'architecture ou de `company/`
 - `init` — initialisation du vault
 
 ## Format strict

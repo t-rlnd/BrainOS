@@ -1,6 +1,6 @@
 ---
 name: write-entity
-description: Créer ou mettre à jour une page wiki/entities/ pour une personne, entreprise, outil ou projet mentionné dans une source. Utilise cette skill pour chaque entité notable identifiée lors d'un ingest.
+description: Créer ou mettre à jour une page wiki/entities/ (personne, entreprise, outil) ou wiki/projects/ (projet, client suivi dans le temps) mentionnée dans une source. Utilise cette skill pour chaque entité notable identifiée lors d'un ingest.
 ---
 
 # write-entity
@@ -11,7 +11,7 @@ Pour chaque entité **notable** mentionnée dans une source ingérée :
 - **Personne** : auteur, expert cité, fondateur, figure du domaine
 - **Entreprise** : acteur du marché, concurrent, partenaire
 - **Outil** : logiciel, SaaS, framework, API
-- **Projet** : initiative publique, open source, produit
+- **Projet** : projet ou client suivi dans le temps, initiative, produit. **Va dans `wiki/projects/`**, avec `type: project` dans le frontmatter.
 
 **Règle de notabilité** : si l'entité est mentionnée en passant (« comme Google ») sans apport informatif, **ne pas créer de page**. Une page entité = une entité qui mérite d'être suivie dans le temps.
 
@@ -21,7 +21,7 @@ Pour chaque entité **notable** mentionnée dans une source ingérée :
 ---
 title: "Nom affichable"
 type: entity
-entity_type: person | company | tool | project
+entity_type: person | company | tool
 domain: [domaine principal]
 tags: [tag1, tag2]
 created: YYYY-MM-DD
