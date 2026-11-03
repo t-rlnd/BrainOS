@@ -25,12 +25,9 @@ Au fil des semaines, **ton wiki grandit tout seul**. Tu peux lui poser des quest
 
 ## À quoi ça ressemble en pratique
 
-Tu as **deux fenêtres ouvertes côte à côte** :
+Ton BrainOS est un dossier sur ton ordinateur. Tu l'ouvres dans une surface Claude Code : **l'onglet Code de Claude Desktop** si tu débutes, le terminal ou ton éditeur de code si tu préfères. Tu discutes avec Claude, il travaille directement dans tes fichiers.
 
-- **Obsidian** (à gauche) — c'est là que tu lis ton wiki. Les pages, les liens, la vue en graphe.
-- **Claude Code** (à droite, dans une fenêtre de code, Visual Studio Code par exemple) — c'est là que tu discutes avec Claude.
-
-Tu lui demandes d'analyser une source. Il travaille. Les nouvelles pages apparaissent en direct dans Obsidian. Tu cliques, tu lis, tu challenges, tu poses la question suivante.
+Tu lui demandes d'analyser une source. Il travaille. Les nouvelles pages apparaissent dans ton dossier. Si tu utilises Obsidian à côté, tu les vois arriver en direct, avec les liens entre elles. Tu cliques, tu lis, tu challenges, tu poses la question suivante.
 
 C'est vraiment ça. Rien de plus compliqué.
 
@@ -42,8 +39,8 @@ Ce dossier est un **guide de démarrage en 5 étapes**. Tu le suivras dans l'ord
 
 | Étape | Fichier | Temps |
 |---|---|---|
-| 1 | **[01-installation.md](01-installation.md)** — installer les outils | 15–25 min |
-| 2 | **[02-configure-your-brain.md](02-configure-your-brain.md)** — configurer ton cerveau | 10–15 min |
+| 1 | **[01-installation.md](01-installation.md)** — installer et ouvrir ta base | 10–20 min |
+| 2 | **[02-configure-your-brain.md](02-configure-your-brain.md)** — configurer ton cerveau | 15–20 min |
 | 3 | **[03-first-ingest.md](03-first-ingest.md)** — première source, première question | 10 min |
 | 4 | **[04-going-further.md](04-going-further.md)** — astuces et ressources | lecture libre |
 | 5 | **[99-cleanup.md](99-cleanup.md)** — nettoyer ce dossier une fois à l'aise | 1 min |
@@ -57,7 +54,8 @@ Ce dossier est un **guide de démarrage en 5 étapes**. Tu le suivras dans l'ord
 **Non.** Tu as juste besoin de :
 - Savoir ouvrir une application
 - Savoir copier-coller
-- Savoir taper quelques commandes qu'on t'indique mot pour mot
+- Savoir coller un prompt qu'on te donne mot pour mot
+- Un abonnement Claude Pro ou Max
 
 Tout le reste est expliqué à chaque étape.
 

@@ -32,62 +32,86 @@ Après quelques semaines, ton wiki devient plus riche que ta propre mémoire sur
 
 ## Comment ça marche
 
-Tu as deux fenêtres ouvertes côte à côte :
+BrainOS est un simple dossier de fichiers Markdown. Claude y travaille directement : il lit tes fichiers, en crée, les relie. Tu n'es enfermé dans aucune application. Le même dossier s'ouvre dans :
 
-- **Obsidian** → tu lis ton wiki, tu navigues le graphe de connexions
-- **Claude Code** → tu discutes avec Claude, il modifie les fichiers en direct
+| Surface | Pour qui |
+|---|---|
+| **Claude Desktop, onglet Code** | Tout le monde. Aucun terminal. C'est le chemin conseillé pour démarrer. |
+| **Le terminal** (`claude`) | Ceux qui aiment la ligne de commande, les tâches longues, l'automatisation |
+| **Un éditeur** (VS Code, Cursor, JetBrains) avec l'extension Claude Code | Ceux qui codent déjà |
+| **claude.ai/code**, dans le navigateur | Ceux qui ont mis leur base sur GitHub |
 
-Trois opérations principales :
+Toutes ces surfaces lisent le même `CLAUDE.md` et proposent les mêmes commandes. Tu peux commencer dans l'une et passer à une autre sans rien changer au dossier. [Obsidian](https://obsidian.md) est recommandé pour lire ton wiki et voir le graphe des liens, mais facultatif.
 
-| Opération | Commande | Ce qui se passe |
-|---|---|---|
-| **Ingest** | `/analyze [source]` | Claude lit une URL, un PDF ou un fichier, discute avec toi, puis écrit 5–15 pages dans le wiki |
-| **Query** | `/brain [question]` | Claude lit l'index du wiki, synthétise une réponse avec citations vers tes propres pages |
-| **Lint** | `/lint` | Claude audite le wiki : pages orphelines, contradictions, concepts sans page dédiée, lacunes à combler |
+Les commandes :
 
-Plus quelques utilitaires : `/daily` pour la note du jour, `/transcript` pour les réunions, `/end-session` pour clôturer une session de travail.
+| Commande | Ce qui se passe |
+|---|---|
+| `/analyze [source]` | Claude lit une URL, un PDF, un transcript ou ce qui attend dans `raw/`, discute de l'angle avec toi, puis écrit 5 à 15 pages dans le wiki |
+| `/brain [question]` | Claude répond à partir de ton wiki, en citant tes propres pages |
+| `/lint` | Claude audite le wiki : pages orphelines, contradictions, concepts sans page, pages périmées |
+| `/todo [action]` | Claude range une action datée dans le bon fichier de `todo/` |
+| `/do [sujet]` | Claude reprend une action avec tout son contexte, puis propose de la cocher |
+| `/daily` | Facultatif : ta note du jour, et ce qui mérite d'aller ailleurs |
+
+Tu peux créer tes propres commandes : ce sont de simples fichiers dans `.claude/commands/`.
 
 ## Démarrage
 
-**[Commence par le dossier `_readme/`](_readme/00-start-here.md)** — 5 étapes dans l'ordre, environ 30 à 45 minutes pour tout installer et faire ta première ingestion.
+**[Commence par le dossier `_readme/`](_readme/00-start-here.md)** : 5 étapes dans l'ordre, environ 45 minutes pour tout installer, configurer ta base et faire ta première analyse.
 
 | Étape | Fichier | Durée |
 |---|---|---|
 | 00 | [Commence ici](_readme/00-start-here.md) | 5 min |
-| 01 | [Installation](_readme/01-installation.md) | 15–25 min |
-| 02 | [Configure ton cerveau](_readme/02-configure-your-brain.md) | 10–15 min |
+| 01 | [Installation](_readme/01-installation.md) | 10–20 min |
+| 02 | [Configure ton cerveau](_readme/02-configure-your-brain.md) | 15–20 min |
 | 03 | [Première source, première question](_readme/03-first-ingest.md) | 10 min |
 | 04 | [Aller plus loin](_readme/04-going-further.md) | lecture libre |
 | 99 | [Nettoyage](_readme/99-cleanup.md) | 1 min |
 
+> Tu veux être accompagné ? Le workshop **W01 · Ton second cerveau** de l'[Académie initWeb](https://initweb.fr) construit ce BrainOS pas à pas, avec vidéos, prompts et une base de démonstration.
+
 ## Prérequis
 
-- **[Obsidian](https://obsidian.md)** — gratuit — pour lire et naviguer le wiki
-- **[Visual Studio Code](https://code.visualstudio.com)** — gratuit — pour discuter avec Claude
-- **[Claude Code](https://docs.claude.com/en/docs/claude-code)** — abonnement Claude Pro ou Max requis
-- **[Node.js](https://nodejs.org/en/download)** — gratuit — moteur nécessaire à Claude Code
+- **Un abonnement Claude Pro ou Max.** Claude Code, qui travaille dans ton dossier, n'est pas inclus dans le plan gratuit. Et analyser tes sources demande du volume.
+- **Une surface Claude Code** : [Claude Desktop](https://claude.ai/download) suffit.
+- **[Obsidian](https://obsidian.md)**, facultatif, gratuit, pour lire et naviguer dans le wiki.
 
-Tout est détaillé dans [01-installation.md](_readme/01-installation.md), y compris pour les profils non-technophiles.
+Tout est détaillé dans [01-installation.md](_readme/01-installation.md).
 
 ## Structure du projet
 
 ```
 BrainOS/
-├── _readme/            → Guide de démarrage (à supprimer après onboarding)
-├── raw/                → Dépose tes sources brutes ici
-├── wiki/               → Savoir compilé — Claude écrit, tu lis
-│   ├── sources/        → Résumés de sources (1 page = 1 source)
+├── CLAUDE.md           → Le schéma : lu en premier à chaque session
+├── memory.md           → Les règles apprises en route
+├── index.md            → La carte (pointe vers un --index- par dossier)
+├── log.md              → Le journal des opérations
+│
+├── company/            → Ton activité : now, offers, metrics, writing-rules
+├── todo/               → Tes actions datées : business, clients, content
+│
+├── raw/                → Dépose ta matière brute ici (jamais modifiée)
+│   └── resources/      → Originaux déjà analysés, images
+├── wiki/               → Savoir compilé : Claude écrit, tu lis
+│   ├── sources/        → Une page par source
+│   ├── meetings/       → Une page par réunion
+│   ├── entities/       → Personnes, entreprises, outils
+│   ├── projects/       → Projets et clients suivis dans le temps
 │   ├── topics/         → Connaissance par domaine
 │   ├── concepts/       → Modèles mentaux, frameworks, idées
-│   ├── entities/       → Personnes, entreprises, outils, projets
-│   ├── synthesis/      → Analyses cross-domaines + réponses archivées
-│   └── decisions/      → Décisions importantes + contexte
-├── daily/              → Notes quotidiennes (tu écris, Claude extrait)
-├── outputs/            → Livrables générés
-├── index.md            → Catalogue global du wiki (Claude maintient)
-├── log.md              → Journal chronologique (Claude maintient)
-└── CLAUDE.md           → Schéma du système (configuré à l'étape 02)
+│   ├── decisions/      → Décisions importantes et leur contexte
+│   └── synthesis/      → Analyses croisées, réponses archivées
+│
+├── daily/              → (optionnel) notes du jour
+├── outputs/            → Livrables : drafts, analyses, exports
+├── .claude/            → Commandes, skills et agents
+└── _readme/            → Guide de démarrage (à supprimer après)
 ```
+
+Les dossiers sont en anglais, sans accent : c'est ce qui évite les erreurs de chemin. Tes fichiers, eux, peuvent rester en français. Chaque dossier a son `--index-<dossier>.md`.
+
+Cette arborescence est une base de départ, pas un cadre figé. Renomme, ajoute ou supprime des sous-dossiers selon ton quotidien. Demande simplement à Claude de mettre à jour le `CLAUDE.md` et les index.
 
 ## À qui c'est destiné
 

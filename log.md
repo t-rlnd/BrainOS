@@ -7,4 +7,5 @@
 
 ## [YYYY-MM-DD] init | BrainOS initialisé
 
-Vault créé. CLAUDE.md configuré. Structure vide prête.
+Vault créé. Structure prête : company/, todo/, raw/, wiki/, outputs/, daily/.
+À faire : l'interview de configuration (`_readme/02-configure-your-brain.md`).

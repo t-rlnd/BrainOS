@@ -27,10 +27,12 @@ Si les 4 sont cochés → tu peux supprimer.
 2. Choisis **"Delete"**
 3. Valide
 
-### Option 2 — Dans VS Code
+### Option 2 — En demandant à Claude
 
-1. Clic droit sur le dossier `_readme` dans l'explorateur
-2. **"Move to Trash"** (Mac) ou **"Delete"** (Windows/Linux)
+Dans ta session :
+> *« Supprime le dossier _readme/ et retire les mentions qui y renvoient dans CLAUDE.md et index.md, s'il y en a. Note l'opération dans log.md. »*
+
+Claude te demandera la permission avant de supprimer.
 
 ### Option 3 — En ligne de commande
 
@@ -61,7 +63,8 @@ Tu n'as plus besoin de ce guide. Tu es entré dans le **mode normal** de BrainOS
 
 - Nouvelle source intéressante → `/analyze`
 - Question en tête → `/brain`
-- Réflexion à structurer → `/daily`
+- Chose à faire → `/todo`, puis `/do` le moment venu
+- Réflexion à structurer → `/daily` (facultatif)
 - Entretien mensuel → `/lint`
 
 Bienvenue dans ton Second Brain. Plus tu l'utilises, plus il te rend de service.

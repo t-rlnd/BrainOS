@@ -12,7 +12,7 @@ argument-hint: [question en langage naturel]
 ### 1. Session loading (si pas déjà fait)
 
 - Lire `index.md` pour orienter
-- `grep "^## \[" log.md | tail -10`
+- `grep "^## \[" log.md | head -10`
 
 ### 2. Ciblage des pages
 

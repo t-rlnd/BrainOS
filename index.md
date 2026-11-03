@@ -1,6 +1,6 @@
 # BrainOS — Index
 
-> Hub de navigation. Lire ce fichier en début de session pour orienter, puis ouvrir le `--index-*` du domaine visé.
+> Hub de navigation. Lire ce fichier en début de session, puis ouvrir le `--index-*` du dossier visé.
 > Avant de créer une page : vérifier dans le `--index-*` du dossier concerné.
 
 ---
@@ -9,52 +9,61 @@
 
 | Si tu cherches… | Va dans… |
 |---|---|
-| *(à remplir au fil des ingests)* | |
+| Mon activité, mes offres, mes tarifs | [[company/--index-company]] |
+| Ce que j'ai à faire | [[todo/--index-todo]] |
+| Ce qu'on s'est dit en réunion | [[wiki/meetings/--index-meetings]] |
+| *(à compléter au fil des analyses)* | |
 
 ---
 
-## Sources — 0 ingérées
+## Company
 
-| Domaine | Sources | Index détaillé |
-|---|---|---|
-| *(aucune source encore)* | 0 | |
+→ [[company/--index-company]] · now, offers, metrics, writing-rules
 
----
+## Todo
 
-## Topics — 0 pages
-
-→ [[topics/--index-topics]] pour la liste complète avec résumés
-
-*(aucun topic encore)*
+→ [[todo/--index-todo]] · business, clients, content
 
 ---
 
-## Concepts — 0 pages
+## Sources — 0 analysées
 
-→ [[concepts/--index-concepts]] pour la liste complète avec résumés
+→ [[wiki/sources/--index-sources]]
 
-*(aucun concept encore)*
+## Meetings — 0 pages
 
----
+→ [[wiki/meetings/--index-meetings]]
 
 ## Entities — 0 pages
 
-→ [[entities/--index-entities]] pour la liste complète avec résumés
+→ [[wiki/entities/--index-entities]]
 
-*(aucune entité encore)*
+## Projects — 0 pages
 
----
+→ [[wiki/projects/--index-projects]]
+
+## Topics — 0 pages
+
+→ [[wiki/topics/--index-topics]]
+
+## Concepts — 0 pages
+
+→ [[wiki/concepts/--index-concepts]]
 
 ## Synthesis & Decisions
 
-→ [[synthesis/--index-synthesis]] · **0 synthèses**
-→ [[decisions/--index-decisions]] · **0 décisions**
+→ [[wiki/synthesis/--index-synthesis]] · **0 synthèses**
+→ [[wiki/decisions/--index-decisions]] · **0 décisions**
 
 ---
 
 ## Outputs
 
-→ [[../outputs/drafts/--index-drafts]] · [[../outputs/analyses/--index-analyses]] · [[../outputs/exports/--index-exports]]
+→ [[outputs/drafts/--index-drafts]] · [[outputs/analyses/--index-analyses]] · [[outputs/exports/--index-exports]]
+
+## Daily
+
+→ [[daily/--index-daily]] (optionnel)
 
 ---
 

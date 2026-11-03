@@ -20,7 +20,7 @@ Un rapport markdown avec :
 - Auteur / éditeur : ...
 - URL source : ...
 - Date de publication : ... (si disponible)
-- Type : article | vidéo | podcast | pdf | livre | tweet | autre
+- Type : article | vidéo | podcast | pdf | livre | tweet | réunion | autre
 - Langue : fr | en | autre
 - Longueur estimée : X mots / Y minutes
 
@@ -40,12 +40,18 @@ Un rapport markdown avec :
 ## Entités mentionnées (personnes, entreprises, outils, projets)
 
 - ...
+
+## Si réunion : participants, décisions, actions
+
+- Participants : ...
+- Décisions : ...
+- Actions (qui, quoi) : ...
 ```
 
 ## Règles
 
 - Pour une URL : utilise `WebFetch` avec un prompt qui demande le contenu complet, sans paraphrase.
-- Pour un fichier local dans `raw/` : utilise `Read`.
+- Pour un fichier local dans `raw/` : utilise `Read`. Ne le modifie jamais.
 - Pour une vidéo YouTube : cherche la transcription (ajouter `?transcript` ou récupérer via l'URL standard). Si indisponible, le signaler.
 - Pour un PDF : utilise `Read` avec le paramètre `pages` si > 10 pages.
 - Normalise les caractères (pas de `&nbsp;`, pas de `\u00a0` mal décodés).

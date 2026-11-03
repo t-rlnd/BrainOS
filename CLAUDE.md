@@ -1,12 +1,15 @@
-# BrainOS — Schema
+# BrainOS — Schéma
 
-BrainOS est un wiki personnel maintenu par le LLM. Tu apportes les sources et poses les questions. Le LLM fait tout le reste.
+BrainOS est un second cerveau maintenu par Claude. J'apporte les sources et les questions. Tu fais l'extraction, la structuration, les liens et les synthèses.
+
+> Ce fichier est un modèle. La section « Qui tu es » et la section « Comment travailler avec moi » se remplissent pendant l'interview de configuration (`_readme/02-configure-your-brain.md`). Le reste est le socle : garde-le tel quel.
 
 ## Qui tu es
 
-[TON NOM] — [TON RÔLE / TA DESCRIPTION EN 1-2 PHRASES].
-Stack : [TES OUTILS PRINCIPAUX]. Objectifs : [TES OBJECTIFS].
+[TON PRÉNOM ET NOM], [TON MÉTIER ET TON STATUT].
+[TON ACTIVITÉ EN UNE PHRASE : CE QUE TU FAIS, POUR QUI, COMMENT.]
 Domaines principaux : [DOMAINE 1], [DOMAINE 2], [DOMAINE 3].
+Détail : `company/now.md` et `company/offers.md`.
 
 ---
 
@@ -14,100 +17,99 @@ Domaines principaux : [DOMAINE 1], [DOMAINE 2], [DOMAINE 3].
 
 ```
 BrainOS/
-├── raw/                → Drop zone sources externes (immutable — LLM lit, ne modifie jamais)
-│   └── assets/         → Images téléchargées localement
-├── wiki/               → Savoir compilé — LLM écrit, tu lis
-│   ├── sources/        → Résumés de sources (1 page = 1 source)
-│   ├── topics/         → Connaissance domaine
+├── CLAUDE.md           → Ce fichier, lu en premier
+├── memory.md           → Règles et corrections apprises en route
+├── index.md            → Hub de navigation (pointe vers les --index-*)
+├── log.md              → Journal des opérations (append only)
+│
+├── company/            → Mon activité : now, offers, metrics, writing-rules
+├── todo/               → Mes actions, une ligne datée chacune
+│   ├── business/       → Relances, devis, administratif
+│   ├── clients/        → Ce que je dois aux clients, ce que j'attends d'eux
+│   └── content/        → Idées de posts, d'articles, de vidéos
+│
+├── raw/                → Drop zone : la matière brute, jamais modifiée
+│   └── resources/      → Originaux déjà analysés, images
+├── wiki/               → Savoir compilé : tu écris, je lis
+│   ├── sources/        → Une page par source analysée
+│   ├── meetings/       → Une page par réunion (transcript, compte rendu)
+│   ├── entities/       → Personnes, entreprises, outils
+│   ├── projects/       → Projets et clients suivis dans le temps
+│   ├── topics/         → Connaissance par domaine
 │   ├── concepts/       → Modèles mentaux, frameworks, idées
-│   ├── entities/       → Personnes, entreprises, outils, projets
-│   ├── synthesis/      → Analyses cross-domaines + réponses archivées
-│   └── decisions/      → Décisions importantes + contexte
-├── daily/              → Notes quotidiennes (tu écris, LLM extrait)
-├── outputs/            → Livrables générés
-│   ├── drafts/
-│   ├── analyses/
-│   └── exports/
-├── index.md            → Catalogue global du wiki (LLM maintient)
-├── log.md              → Journal chronologique append-only (LLM maintient)
-└── CLAUDE.md           → Ce fichier — schema, conventions, workflows
+│   ├── decisions/      → Décisions importantes et leur contexte
+│   └── synthesis/      → Analyses croisées, réponses archivées
+│
+├── daily/              → (optionnel) notes du jour, via /daily
+├── outputs/            → Livrables : drafts/, analyses/, exports/
+└── .claude/            → commands/, skills/, agents/
 ```
+
+Chaque dossier a son `--index-<dossier>.md`. Cette arborescence est une base de départ : si je la change, mets à jour cette section et les index.
 
 ---
 
-## Session loading
+## Au démarrage de chaque session
 
-**À chaque session**, lire dans cet ordre :
-1. `index.md` — vue d'ensemble du wiki, pages disponibles
-2. `grep "^## \[" log.md | tail -10` — 10 dernières opérations
+1. Lis `index.md`.
+2. Lis les 10 dernières entrées de `log.md` : `grep "^## \[" log.md | head -10`.
+3. Lis `memory.md` et `company/now.md`.
+4. Si ma demande est une tâche précise, lis le fichier de `todo/` concerné. Si elle concerne un client ou un sujet, ouvre sa page dans `wiki/` avant de répondre.
+5. Si la racine de `raw/` contient des fichiers pas encore analysés, signale-le-moi en une ligne.
 
-Ces deux fichiers remplacent tout Fast Memory. Ils sont toujours à jour.
+---
+
+## Comment travailler avec moi
+
+- [À REMPLIR PENDANT L'INTERVIEW : tutoiement, ton, longueur des réponses, être challengé ou non…]
+- Si une information manque dans la base, dis-le au lieu de l'inventer.
+- Cite la page d'où vient une information : `[[page]]`.
+- Mon style d'écriture est dans `company/writing-rules.md`.
 
 ---
 
 ## Opérations
 
-### Ingest
+| Commande | Ce qu'elle fait |
+|---|---|
+| `/analyze [source]` | Analyse une source (URL, fichier, `raw/`) et l'intègre au wiki. Sans argument : tout ce qui attend à la racine de `raw/` |
+| `/brain [question]` | Répond à partir du wiki, avec citations, et propose d'archiver dans `synthesis/` |
+| `/lint` | Audite le wiki : orphelines, concepts fantômes, contradictions, pages périmées |
+| `/daily [texte]` | Crée ou complète la note du jour et propose ce qui mérite d'aller ailleurs |
+| `/todo [action]` | Range une action datée dans le bon fichier de `todo/` |
+| `/do [sujet]` | Reprend une action de `todo/` avec son contexte, puis propose de la cocher |
 
-Déclenchée par `/analyze [source]` (URL, fichier local, chemin raw/).
+### Ingest (`/analyze`)
 
-Flux recommandé (mode impliqué) :
-1. Extraire le contenu brut (agent `source-extractor`)
-2. **Discuter avec l'utilisateur** — thèse, points clés, angle à retenir
-3. Écrire la page `wiki/sources/` (skill `write-source`)
-4. Toucher les pages `topics/` et `concepts/` pertinentes (agent `wiki-integrator`)
-5. Créer/mettre à jour les pages `entities/` mentionnées (skill `write-entity`)
-6. Mettre à jour `index.md` (skill `update-index`)
-7. Appender à `log.md` (skill `append-log`)
+1. Extraire le contenu (agent `source-extractor`).
+2. Mode impliqué par défaut : discuter avec moi (thèse, points clés, angle) avant d'écrire. Mode batch (`/analyze batch`) : sans pause.
+3. Écrire la page `wiki/sources/` (skill `write-source`). Si c'est une réunion : une page `wiki/meetings/` en plus.
+4. Toucher les pages `topics/` et `concepts/` (agent `wiki-integrator`), puis `entities/` et `projects/` (skill `write-entity`).
+5. Ranger mes actions dans `todo/` (une ligne datée, lien vers la source ou la réunion).
+6. Mettre à jour les index (skill `update-index`) et `log.md` (skill `append-log`).
+7. Ranger l'original dans `raw/resources/`. Ne jamais le supprimer.
 
-Mode batch (sans discussion) : exécuter les étapes 1, 3–7 sans pause.
-
-Une source peut toucher 5 à 15 pages wiki. C'est normal.
-
-### Query
-
-Déclenchée par `/brain [question]`.
-
-Flux :
-1. Lire `index.md` pour identifier les pages pertinentes
-2. Lire les pages ciblées
-3. Synthétiser la réponse avec citations wiki (`[[page]]`)
-4. **Proposer d'archiver** la réponse dans `wiki/synthesis/` si elle est non-triviale
-
-Les bonnes réponses sont des pages wiki. Elles ne doivent pas disparaître dans l'historique de chat.
-
-### Lint
-
-Déclenchée par `/lint`.
-
-L'agent `wiki-auditor` cherche :
-- Pages orphelines (aucun lien entrant)
-- Concepts mentionnés mais sans page dédiée
-- Contradictions entre pages
-- Données périmées (sources > 6 mois sur des sujets qui évoluent vite)
-- Cross-références manquantes évidentes
-- Suggestions de nouvelles sources à chercher
+Une source touche souvent 5 à 15 pages. C'est normal.
 
 ---
 
 ## Conventions
 
-### Langue
-- Français dans le wiki, sauf termes techniques
-- Markdown Obsidian — wikilinks `[[page]]`, callouts `> [!note]`, frontmatter YAML
+### Langue et format
+- Français, sauf termes techniques.
+- Markdown Obsidian : wikilinks `[[page]]`, callouts `> [!note]`, frontmatter YAML.
 
-### Nommage des fichiers
-- kebab-case, minuscules, 2–4 mots
-- Pas de préfixe redondant avec le dossier parent
-- `wiki/topics/webflow-cms.md` ✅ — pas `wiki/topics/topic-webflow-cms.md` ❌
+### Nommage
+- Dossiers en anglais, sans accent ni apostrophe. Fichiers en français.
+- kebab-case, minuscules, 2 à 4 mots, sans préfixe redondant avec le dossier.
+- Réunions : `wiki/meetings/YYYY-MM-DD-sujet.md`.
 
-### Frontmatter obligatoire
+### Frontmatter des pages wiki
 
 ```yaml
 ---
 title: "Titre lisible"
-type: source | topic | concept | entity | synthesis | decision
-domain: [ton domaine 1] | [ton domaine 2] | business | autre
+type: source | meeting | entity | project | topic | concept | decision | synthesis
 tags: []
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
@@ -115,65 +117,68 @@ sources: 1
 ---
 ```
 
-Pour `entity`, ajouter : `entity_type: person | company | tool | project`
-Pour `source`, ajouter : `source_url: ""` et `source_author: ""`
+Pour `entity`, ajouter `entity_type: person | company | tool`. Pour `source`, ajouter `source_url: ""` et `source_author: ""`.
+
+### Todo
+Une action par ligne, avec sa date d'ajout et sa case. Pas d'échéance obligatoire.
+
+```
+- [ ] 2026-11-04 · Relancer Maison Verdier sur la proposition · [[maison-verdier]]
+- [x] 2026-11-02 · Envoyer le devis à Atelier Nord · [[atelier-nord]]
+```
+
+Ne jamais cocher une action sans mon accord. Ne jamais supprimer une ligne : une action abandonnée est barrée (`~~…~~`).
 
 ### Liens
-- Toujours lier bidirectionnellement : si A mentionne B, B mentionne A
-- Maximum 5 wikilinks par page (hors section "Connexions")
-- Section "Connexions" en bas de page pour les liens secondaires
+- Si A cite B, B cite A.
+- Au plus 5 wikilinks dans le texte, les autres dans une section « Connexions » en bas.
 
 ### Index
-`index.md` est un **hub de navigation** — il pointe vers les `--index-*` par dossier, pas vers les pages individuelles.
-
-Chaque dossier wiki a un fichier `--index-[nom].md` qui liste le contenu détaillé avec une phrase de résumé par page.
-
-À chaque ingest, mettre à jour :
-1. Le `_Index` du dossier concerné (ajouter la ligne de la nouvelle page)
-2. Le compteur dans `index.md` si nécessaire
-
-Format d'une ligne dans un `_Index` :
+`index.md` pointe vers les `--index-*.md`, pas vers les pages. Chaque `--index-*.md` a une ligne par page :
 ```
-| [[slug-page]] | description une ligne | YYYY-MM-DD |
+| [[slug-page]] | description en une ligne | YYYY-MM-DD |
 ```
 
 ### Log
-Format d'un en-tête dans `log.md` :
+En-tête d'une entrée de `log.md`, la plus récente en haut :
 ```
 ## [YYYY-MM-DD] <operation> | <titre>
 ```
-Opérations valides : `ingest` · `query` · `lint` · `daily` · `end-session` · `init`
+Opérations : `init` · `ingest` · `meeting` · `query` · `lint` · `daily` · `todo` · `export` · `config`
 
 ---
 
 ## Permissions
 
-| Zone | Claude lit | Claude écrit | Notes |
+| Zone | Lire | Écrire | Notes |
 |---|---|---|---|
-| `raw/` | ✅ | ✅ (supprime après ingest si demandé) | Sources immutables |
+| `company/` | ✅ | ✅ avec mon accord | Je valide chaque modification |
+| `todo/` | ✅ | ✅ | Ajouter, cocher avec mon accord, jamais supprimer |
+| `raw/` | ✅ | déplacer vers `raw/resources/` | Ne jamais modifier ni supprimer |
 | `wiki/` | ✅ | ✅ | Enrichissement continu |
-| `daily/` | ✅ | ✅ (via /daily uniquement) | Ne modifie jamais une note existante |
+| `daily/` | ✅ | ✅ via /daily | Ne jamais modifier une note passée |
 | `outputs/` | ✅ | ✅ | Livrables sur demande |
-| `index.md` | ✅ | ✅ | Mis à jour à chaque ingest |
-| `log.md` | ✅ | ✅ (append only) | Ne jamais modifier une entrée |
-| `.obsidian/` | ❌ | ❌ | Jamais toucher |
+| `index.md`, `--index-*` | ✅ | ✅ | À chaque création de page |
+| `log.md` | ✅ | append only | Ne jamais modifier une entrée |
+| `.obsidian/` | ❌ | ❌ | Jamais |
 
 ---
 
 ## Interdits
 
-- Ne jamais modifier une entrée existante dans `log.md`
-- Ne jamais supprimer un fichier `raw/` sans avoir créé la page `wiki/sources/` correspondante
-- Ne jamais créer de doublon — vérifier `index.md` avant toute création
-- Ne jamais modifier `.obsidian/`
-- Ne pas créer de fichiers hors des zones autorisées sans demande explicite
-- **Ne jamais créer une page vide** — toute page wiki doit avoir du contenu substantiel dès sa création
+- Ne jamais modifier ni supprimer un fichier de `raw/`.
+- Ne jamais modifier une entrée existante de `log.md`.
+- Ne jamais créer de doublon : vérifier l'index avant toute création.
+- Ne jamais créer une page vide.
+- Ne jamais écrire de mot de passe, de donnée bancaire, de numéro d'identité, d'adresse personnelle ni d'information de santé.
+- Ne jamais modifier `.obsidian/`.
+- Ne rien supprimer sans me demander.
 
 ---
 
 ## Self-improvement
 
 Après toute correction de comportement :
-1. Identifier la règle générale derrière la correction
-2. Mettre à jour ce CLAUDE.md ou les fichiers `.claude/` concernés
-3. Ne pas répéter la même erreur
+1. Identifier la règle générale derrière la correction.
+2. L'ajouter à `memory.md` (titre, date, règle, pourquoi).
+3. Si elle devient permanente et générale, la remonter dans ce fichier.

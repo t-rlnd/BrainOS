@@ -17,7 +17,7 @@ description: Mettre à jour index.md (hub global) et les fichiers --index-*.md d
 BrainOS utilise **deux niveaux d'index** :
 
 1. **`index.md`** (racine) = **hub de navigation**. Pointe vers les `--index-*.md` par dossier. Compteurs globaux.
-2. **`wiki/[dossier]/--index-[dossier].md`** = **catalogue détaillé** du dossier avec une ligne par page.
+2. **`[dossier]/--index-[dossier].md`** = **catalogue détaillé** du dossier avec une ligne par page. Dossiers concernés : `company/`, `todo/`, chaque sous-dossier de `wiki/` (sources, meetings, entities, projects, topics, concepts, decisions, synthesis), `outputs/*`, `daily/`.
 
 ## Mise à jour d'un `--index-*.md`
 
