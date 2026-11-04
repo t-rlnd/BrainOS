@@ -148,6 +148,18 @@ Opérations : `init` · `ingest` · `meeting` · `query` · `lint` · `daily` ·
 
 ---
 
+## Sauvegarde
+
+Ne s'applique que si ma base est dans un dépôt Git relié à mon dépôt GitHub privé.
+
+- Lire ma base ne demande rien : pas de question, pas de sauvegarde.
+- Dès que tu as créé ou modifié des fichiers de ma base, termine ta réponse par la question : « Je sauvegarde dans BrainOS ? »
+- Si je réponds oui : vérifie qu'aucun fichier modifié ne contient de donnée sensible (voir Interdits), puis fais un commit avec un message court qui résume les changements, et un push vers mon dépôt GitHub privé.
+- Si je réponds non, ne repose la question qu'à la prochaine modification.
+- Ne pousse jamais vers le dépôt public du template t-rlnd/BrainOS.
+
+---
+
 ## Permissions
 
 | Zone | Lire | Écrire | Notes |
